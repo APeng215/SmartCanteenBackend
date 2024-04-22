@@ -5,12 +5,10 @@ import lombok.AccessLevel;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Data
@@ -20,8 +18,8 @@ public class Users implements UserDetails {
     @Id
     private String username;
     private String password;
-    @ElementCollection(targetClass = SimpleGrantedAuthority.class)
-    private Set<SimpleGrantedAuthority> authorities = new HashSet<>();
+    @ManyToMany(cascade = CascadeType.ALL)
+    private Set<Authorities> authorities = new HashSet<>();
     private boolean accountNonExpired;
     private boolean accountNonLocked;
     private boolean credentialsNonExpired;
@@ -33,9 +31,9 @@ public class Users implements UserDetails {
      * @param password 密码
      */
     public Users(String username, String password) {
-        this.password = password;
+        this.password = new BCryptPasswordEncoder().encode(password);
         this.username = username;
-        this.authorities.add(new SimpleGrantedAuthority("USER"));
+        this.authorities.add(new Authorities(username, "ROLE_USER"));
         this.accountNonExpired = true;
         this.accountNonLocked = true;
         this.credentialsNonExpired = true;

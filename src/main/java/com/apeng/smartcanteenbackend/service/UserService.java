@@ -1,5 +1,7 @@
 package com.apeng.smartcanteenbackend.service;
 
+import com.apeng.smartcanteenbackend.entity.Users;
+
 public interface UserService {
 
     /**
@@ -8,6 +10,6 @@ public interface UserService {
      * @param password 密码
      * @param role 角色
      */
-    void addUser(String username, String password, String role);
+    void addUser(Users user);
 
 }

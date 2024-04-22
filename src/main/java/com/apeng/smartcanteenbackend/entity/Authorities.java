@@ -1,8 +1,6 @@
 package com.apeng.smartcanteenbackend.entity;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.AccessLevel;
 import lombok.Data;
@@ -15,12 +13,8 @@ import org.springframework.security.core.GrantedAuthority;
 public class Authorities implements GrantedAuthority {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
-    private Long id;
-
-    private String username;
     private String authority;
-
+    private String username;
 
     public Authorities(String username, String authority) {
         this.username = username;

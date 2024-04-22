@@ -1,5 +1,6 @@
 package com.apeng.smartcanteenbackend;
 
+import com.apeng.smartcanteenbackend.entity.Users;
 import com.apeng.smartcanteenbackend.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,7 +21,7 @@ public class SmartCanteenBackendApplication {
     @Bean
     public CommandLineRunner demo(UserService userService) {
         return (args) -> {
-            userService.addUser("admin", "123456", "ROLE_USER");
+            userService.addUser(new Users("admin", "123456"));
         };
     }
 
