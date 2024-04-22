@@ -4,11 +4,14 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import lombok.AccessLevel;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 
 @Entity
 @Data
+@NoArgsConstructor(access=AccessLevel.PROTECTED, force=true)
 public class Authorities implements GrantedAuthority {
 
     @Id
@@ -24,6 +27,4 @@ public class Authorities implements GrantedAuthority {
         this.authority = authority;
     }
 
-    protected Authorities() {
-    }
 }

@@ -1,7 +1,9 @@
 package com.apeng.smartcanteenbackend.entity;
 
 import jakarta.persistence.*;
+import lombok.AccessLevel;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -12,14 +14,12 @@ import java.util.Set;
 
 @Entity
 @Data
+@NoArgsConstructor(access=AccessLevel.PROTECTED, force=true)
 public class Users implements UserDetails {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
-    private Long id;
-
-    private String password;
     private String username;
+    private String password;
     @ElementCollection(targetClass = SimpleGrantedAuthority.class)
     private Set<SimpleGrantedAuthority> authorities = new HashSet<>();
     private boolean accountNonExpired;
@@ -40,9 +40,6 @@ public class Users implements UserDetails {
         this.accountNonLocked = true;
         this.credentialsNonExpired = true;
         this.enabled = true;
-    }
-
-    protected Users() {
     }
 
 
