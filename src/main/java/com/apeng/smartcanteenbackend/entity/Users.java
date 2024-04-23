@@ -1,18 +1,25 @@
 package com.apeng.smartcanteenbackend.entity;
 
-import jakarta.persistence.*;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.rest.core.annotation.RestResource;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Data
-@NoArgsConstructor(access=AccessLevel.PROTECTED, force=true)
+@RestResource(rel = "users", path = "users")
+@NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
 public class Users implements UserDetails {
 
     @Id
@@ -27,6 +34,7 @@ public class Users implements UserDetails {
 
     /**
      * 返回一个具有权限为"USER"的用户
+     *
      * @param username 用户名
      * @param password 密码
      */

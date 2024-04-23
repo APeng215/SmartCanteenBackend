@@ -9,7 +9,7 @@ import org.springframework.security.core.GrantedAuthority;
 
 @Entity
 @Data
-@NoArgsConstructor(access=AccessLevel.PROTECTED, force=true)
+@NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
 public class Authorities implements GrantedAuthority {
 
     @Id
