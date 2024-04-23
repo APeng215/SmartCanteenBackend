@@ -1,9 +1,7 @@
 package com.apeng.smartcanteenbackend.entity;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
+import com.apeng.smartcanteenbackend.entity.sub.Authorities;
+import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -24,6 +22,7 @@ public class Users implements UserDetails {
 
     @Id
     private String username;
+    @Column(nullable = false)
     private String password;
     @ManyToMany(cascade = CascadeType.ALL)
     private Set<Authorities> authorities = new HashSet<>();
@@ -39,6 +38,7 @@ public class Users implements UserDetails {
      * @param password 密码
      */
     public Users(String username, String password) {
+        validate(username, password);
         this.password = new BCryptPasswordEncoder().encode(password);
         this.username = username;
         this.authorities.add(new Authorities(username, "ROLE_USER"));
@@ -48,6 +48,9 @@ public class Users implements UserDetails {
         this.enabled = true;
     }
 
+    private static void validate(String username, String password) {
+        if (username.isEmpty() || password.isEmpty()) throw new RuntimeException("Fail to new a user: Username or Password is empty.");
+    }
 
     /**
      * Returns the authorities granted to the user. Cannot return <code>null</code>.

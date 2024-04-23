@@ -1,4 +1,4 @@
-package com.apeng.smartcanteenbackend.entity;
+package com.apeng.smartcanteenbackend.entity.sub;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -9,7 +9,7 @@ import org.springframework.security.core.GrantedAuthority;
 
 @Entity
 @Data
-@NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Authorities implements GrantedAuthority {
 
     @Id
