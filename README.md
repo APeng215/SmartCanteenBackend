@@ -21,7 +21,7 @@ spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
 2. 在请求头添加 Authorization: Basic YWRtaW46MTIzNDU2
 
 > [!TIP]
-> 后端内置了管理员账号，可以用此账号生成 Basic Auth :
+> 后端内置了管理员账号，测试时可以选用此账号生成 Basic Auth :
 > 
 > 账号: Admin
 > 
