@@ -24,12 +24,10 @@ public class Dish {
     private String location;
     private String image_url;
 
-    @OneToOne
-    @JoinColumn
+    @Embedded
     private Nutrition nutrition;
 
-    @OneToOne
-    @JoinColumn
+    @Embedded
     private Weighting weighting;
 
 

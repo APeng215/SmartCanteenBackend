@@ -15,8 +15,9 @@ public class MonitoringController {
     }
 
     @PatchMapping
-    private void updatePeopleNumber(@RequestParam int peopleNumber) {
+    private String updatePeopleNumber(@RequestParam int peopleNumber) {
         MonitoringController.peopleNumber = peopleNumber;
+        return String.format("Update people number to %d successfully!", peopleNumber);
     }
 
 }

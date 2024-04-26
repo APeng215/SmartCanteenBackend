@@ -1,11 +1,10 @@
 package com.apeng.smartcanteenbackend.entity;
 
-import com.apeng.smartcanteenbackend.entity.sub.Authorities;
+import com.apeng.smartcanteenbackend.entity.sub.Authority;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.rest.core.annotation.RestResource;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -16,16 +15,16 @@ import java.util.Set;
 
 @Entity
 @Data
-@RestResource(rel = "users", path = "users")
 @NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
-public class Users implements UserDetails {
+@Table(name = "`users`")
+public class User implements UserDetails {
 
     @Id
     private String username;
     @Column(nullable = false)
     private String password;
     @ManyToMany(cascade = CascadeType.ALL)
-    private Set<Authorities> authorities = new HashSet<>();
+    private Set<Authority> authorities = new HashSet<>();
     private boolean accountNonExpired;
     private boolean accountNonLocked;
     private boolean credentialsNonExpired;
@@ -37,11 +36,11 @@ public class Users implements UserDetails {
      * @param username 用户名
      * @param password 密码
      */
-    public Users(String username, String password) {
+    public User(String username, String password) {
         validate(username, password);
         this.password = new BCryptPasswordEncoder().encode(password);
         this.username = username;
-        this.authorities.add(new Authorities(username, "ROLE_USER"));
+        this.authorities.add(new Authority(username, "ROLE_USER"));
         this.accountNonExpired = true;
         this.accountNonLocked = true;
         this.credentialsNonExpired = true;

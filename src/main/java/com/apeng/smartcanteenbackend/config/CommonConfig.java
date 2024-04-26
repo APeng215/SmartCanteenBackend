@@ -1,7 +1,7 @@
 package com.apeng.smartcanteenbackend.config;
 
-import com.apeng.smartcanteenbackend.entity.Users;
-import com.apeng.smartcanteenbackend.repository.UsersRepository;
+import com.apeng.smartcanteenbackend.entity.User;
+import com.apeng.smartcanteenbackend.repository.UserRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
@@ -31,8 +31,11 @@ public class CommonConfig {
      * @return
      */
     @Bean
-    public CommandLineRunner addAdminUser(UsersRepository repository) {
-        return (args) -> repository.save(new Users(CommonConfig.ADMIN_USERNAME, CommonConfig.ADMIN_PASSWORD));
+    public CommandLineRunner addAdminUser(UserRepository repository) {
+        return (args) -> {
+            repository.save(new User(CommonConfig.ADMIN_USERNAME, CommonConfig.ADMIN_PASSWORD));
+            repository.save(new User("player", "123456"));
+        };
     }
 
 }

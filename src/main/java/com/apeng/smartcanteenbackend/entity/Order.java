@@ -11,13 +11,18 @@ import java.util.List;
 @Entity
 @Data
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Table(name = "`order`")
 public class Order {
 
     @Id
     @GeneratedValue
     private Long id;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany()
     private List<Dish> dishes = new ArrayList<>();
+
+    @ManyToOne()
+    @JoinColumn
+    private User user;
 
 }
