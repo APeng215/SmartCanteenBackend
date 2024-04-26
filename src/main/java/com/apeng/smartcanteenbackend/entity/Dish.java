@@ -24,6 +24,7 @@ public class Dish {
     private String location;
     @Column(length = 65555)
     private String image_url;
+    private String category;
 
     @Embedded
     private Nutrition nutrition = new Nutrition();
