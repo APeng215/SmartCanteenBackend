@@ -25,6 +25,11 @@ public class CommonConfig {
         return restTemplateBuilder.basicAuthentication(ADMIN_USERNAME, ADMIN_PASSWORD).build();
     }
 
+    /**
+     * 添加管理员用户
+     * @param repository
+     * @return
+     */
     @Bean
     public CommandLineRunner addAdminUser(UsersRepository repository) {
         return (args) -> repository.save(new Users(CommonConfig.ADMIN_USERNAME, CommonConfig.ADMIN_PASSWORD));
