@@ -27,6 +27,8 @@ spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
 > 
 > 密码: 123456
 
+## API 文档
+
 ### 人流检测测试 API
 
 - 更新人流数量 - PATCH `http://localhost:8080/monitoring?peopleNumber=int`
