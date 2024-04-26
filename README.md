@@ -29,5 +29,5 @@ spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
 
 ### 人流检测测试 API
 
-- http://localhost:8080/monitoring?peopleNumber=int - 更新人流数量
-- http://localhost:8080/monitoring - 获取人流数量
+- 更新人流数量 - PATCH http://localhost:8080/monitoring?peopleNumber=int
+- 获取人流数量 - GET http://localhost:8080/monitoring
