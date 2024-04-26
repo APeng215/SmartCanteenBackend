@@ -13,6 +13,9 @@ spring.datasource.password=123456
 spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
 ```
 
+> [!NOTE]
+> 后端会在启动时**自动**为数据库创建数据库表。你只需要为后端创建并配置数据库，数据库表无需手动创建。
+
 ### 如何认证？
 
 进行任何 API 调用都需要在请求头中添加 **Basic Auth** 认证信息，方式如下：
