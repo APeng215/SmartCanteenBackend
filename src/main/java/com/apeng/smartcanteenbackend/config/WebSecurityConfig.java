@@ -21,6 +21,7 @@ public class WebSecurityConfig implements WebMvcConfigurer {
 
     /**
      * 允许跨域请求
+     *
      * @param registry
      */
     @Override
@@ -30,6 +31,7 @@ public class WebSecurityConfig implements WebMvcConfigurer {
 
     /**
      * 配置密码编码方式。认证密码时，先用此编码器将密码编码后，再与数据库中的密码进行比对。
+     *
      * @return
      */
     @Bean
@@ -39,6 +41,7 @@ public class WebSecurityConfig implements WebMvcConfigurer {
 
     /**
      * 配置用户数据的获取方式为通过 JDBC 连接获取数据库用户表中的用户数据。
+     *
      * @param jdbcTemplate
      * @return
      */
@@ -51,6 +54,7 @@ public class WebSecurityConfig implements WebMvcConfigurer {
 
     /**
      * 配置安全过滤器。仅允许认证的用户访问特定 API。
+     *
      * @param http
      * @return
      * @throws Exception

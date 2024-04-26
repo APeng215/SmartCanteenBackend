@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Data
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor
 public class Dish {
 
 
@@ -22,14 +22,14 @@ public class Dish {
 
     private double price;
     private String location;
+    @Column(length = 65555)
     private String image_url;
 
     @Embedded
-    private Nutrition nutrition;
+    private Nutrition nutrition = new Nutrition();
 
     @Embedded
-    private Weighting weighting;
-
+    private Weighting weighting = new Weighting();
 
 
 }

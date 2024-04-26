@@ -48,7 +48,8 @@ public class User implements UserDetails {
     }
 
     private static void validate(String username, String password) {
-        if (username.isEmpty() || password.isEmpty()) throw new RuntimeException("Fail to new a user: Username or Password is empty.");
+        if (username.isEmpty() || password.isEmpty())
+            throw new RuntimeException("Fail to new a user: Username or Password is empty.");
     }
 
     /**
