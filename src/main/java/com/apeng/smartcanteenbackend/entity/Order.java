@@ -18,10 +18,10 @@ public class Order {
     @GeneratedValue
     private Long id;
 
-    @ManyToMany()
+    @ManyToMany
     private List<Dish> dishes = new ArrayList<>();
 
-    @ManyToOne()
+    @ManyToOne
     @JoinColumn
     private User user;
 
