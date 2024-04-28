@@ -32,7 +32,30 @@ spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
 
 ## API 文档
 
-### 人流监测测试 API
+### 人流监测测试
 
-- 更新人流数量 - PATCH `http://localhost:8080/monitoring?peopleNumber=int`
-- 获取人流数量 - GET `http://localhost:8080/monitoring`
+- 更新人流数量 - PATCH `/monitoring?peopleNumber=int`
+- 获取人流数量 - GET `/monitoring`
+
+### 订单
+
+#### 增加
+
+增加订单，订单自动与请求的用户关联
+
+POST `/orders`
+
+请求体样例：
+
+列表中的数字 `1, 2, 3` 为菜品的 ID
+
+```json
+{
+  "dishIds": [1, 2, 3]
+}
+```
+
+#### 查询
+
+
+
