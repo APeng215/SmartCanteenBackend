@@ -1,12 +1,20 @@
 package com.apeng.smartcanteenbackend.config;
 
+import com.apeng.smartcanteenbackend.entity.Dish;
+import com.apeng.smartcanteenbackend.entity.Order;
+import com.apeng.smartcanteenbackend.entity.User;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
+import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
+import org.springframework.data.rest.core.mapping.RepositoryDetectionStrategy;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -17,7 +25,18 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 @EnableWebSecurity
+@EnableMethodSecurity
 public class WebSecurityConfig implements WebMvcConfigurer {
+
+    @Primary
+    @Bean
+    public RepositoryRestConfiguration excludeUserRepoFromExposing(RepositoryRestConfiguration config) {
+        config.setRepositoryDetectionStrategy(RepositoryDetectionStrategy.RepositoryDetectionStrategies.ANNOTATED);
+        config.exposeIdsFor(User.class);
+        config.exposeIdsFor(Dish.class);
+        config.exposeIdsFor(Order.class);
+        return config;
+    }
 
     /**
      * 允许跨域请求

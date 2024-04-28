@@ -1,6 +1,9 @@
 package com.apeng.smartcanteenbackend.entity;
 
 import com.apeng.smartcanteenbackend.entity.sub.Authority;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonIncludeProperties;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Data;
@@ -17,6 +20,7 @@ import java.util.Set;
 @Data
 @NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
 @Table(name = "`users`")
+@JsonIncludeProperties({ "username" })
 public class User implements UserDetails {
 
     @Id
@@ -41,6 +45,17 @@ public class User implements UserDetails {
         this.password = new BCryptPasswordEncoder().encode(password);
         this.username = username;
         this.authorities.add(new Authority(username, "ROLE_USER"));
+        this.accountNonExpired = true;
+        this.accountNonLocked = true;
+        this.credentialsNonExpired = true;
+        this.enabled = true;
+    }
+
+    public User(String username, String password, Set<Authority> authorities) {
+        validate(username, password);
+        this.password = new BCryptPasswordEncoder().encode(password);
+        this.username = username;
+        this.authorities = authorities;
         this.accountNonExpired = true;
         this.accountNonLocked = true;
         this.credentialsNonExpired = true;

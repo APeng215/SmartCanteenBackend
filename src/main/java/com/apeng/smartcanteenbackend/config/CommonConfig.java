@@ -2,6 +2,7 @@ package com.apeng.smartcanteenbackend.config;
 
 import com.apeng.smartcanteenbackend.entity.Dish;
 import com.apeng.smartcanteenbackend.entity.User;
+import com.apeng.smartcanteenbackend.entity.sub.Authority;
 import com.apeng.smartcanteenbackend.repository.DishRepository;
 import com.apeng.smartcanteenbackend.repository.UserRepository;
 import org.apache.poi.ss.usermodel.Cell;
@@ -23,6 +24,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.Set;
 
 @Configuration
 public class CommonConfig {
@@ -60,7 +62,7 @@ public class CommonConfig {
     @Bean
     public CommandLineRunner addAdminUser(UserRepository repository) {
         return (args) -> {
-            repository.save(new User(CommonConfig.ADMIN_USERNAME, CommonConfig.ADMIN_PASSWORD));
+            repository.save(new User(CommonConfig.ADMIN_USERNAME, CommonConfig.ADMIN_PASSWORD, Set.of(new Authority(CommonConfig.ADMIN_USERNAME, "ROLE_ADMIN"), new Authority(CommonConfig.ADMIN_USERNAME, "ROLE_USER"))));
             repository.save(new User("player", "123456"));
         };
     }
