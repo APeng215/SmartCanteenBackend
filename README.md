@@ -1,5 +1,7 @@
 # 智慧食堂-后端部分
 
+这是智慧食堂项目的后端部分。有与其配合的[App前端部分](https://github.com/AlearXS/SmartCanteenApp)与[智能识别部分](https://github.com/AlearXS/SmartCanteenDetection)。
+
 ## 开发者须知
 
 ### 如何配置数据库？
