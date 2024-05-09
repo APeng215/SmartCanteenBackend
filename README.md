@@ -16,7 +16,7 @@ spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
 ```
 
 > [!NOTE]
-> 后端会在启动时自动为数据库创建数据库表，**但是**数据库需要你手动创建并配置。
+> 后端会在启动时自动为数据库创建数据库表，**但是**数据库需要你手动创建并配置。具体参看 `application.properties` 中 `spring.jpa.hibernate.ddl-auto=xxx` 这一配置项
 
 ### ~~如何认证？~~
 
