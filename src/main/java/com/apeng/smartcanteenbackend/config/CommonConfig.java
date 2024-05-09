@@ -1,8 +1,10 @@
 package com.apeng.smartcanteenbackend.config;
 
+import com.apeng.smartcanteenbackend.entity.Canteen;
 import com.apeng.smartcanteenbackend.entity.Dish;
 import com.apeng.smartcanteenbackend.entity.User;
 import com.apeng.smartcanteenbackend.entity.sub.Authority;
+import com.apeng.smartcanteenbackend.repository.CanteenRepository;
 import com.apeng.smartcanteenbackend.repository.DishRepository;
 import com.apeng.smartcanteenbackend.repository.UserRepository;
 import org.apache.poi.ss.usermodel.Cell;
@@ -72,6 +74,13 @@ public class CommonConfig {
         return (args) -> {
             Sheet sheet = retrieveDishesSheet();
             writeSheet2DataBase(sheet);
+        };
+    }
+
+    @Bean
+    public CommandLineRunner addDefaultCanteen(CanteenRepository repository) {
+        return (args) -> {
+            repository.save(new Canteen("荷园一餐厅", 10, 5));
         };
     }
 
