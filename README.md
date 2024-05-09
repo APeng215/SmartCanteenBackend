@@ -51,6 +51,8 @@ spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
 
 带有以上请求体的 PUT `/monitoring` 请求将向后端数据库添加一个名称为 *h1*，容量为 *10*，监控人数为 *2* 的食堂监控实体。
 
+其中 `name` 为食堂监控实体的**唯一标识符 / ID**，也就是说数据库中各个食堂监控实体的名称唯一。
+
 #### 获取食堂监控信息 - GET `/monitoring/{canteenName}` 
 
 例如 `http://localhost:8080/monitoring/h1` 请求食堂名为 *h1* 的食堂的监控数据
