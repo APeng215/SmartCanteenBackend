@@ -72,7 +72,7 @@ public class WebSecurityConfig implements WebMvcConfigurer {
     }
 
     /**
-     * 配置安全过滤器。仅允许认证的用户访问特定 API。
+     * 配置安全过滤器。
      *
      * @param http
      * @return
@@ -80,10 +80,12 @@ public class WebSecurityConfig implements WebMvcConfigurer {
      */
     @Bean
     public SecurityFilterChain configureSecurityChain(HttpSecurity http) throws Exception {
-        http.authorizeHttpRequests(authorizeHttpRequests -> {
-                    authorizeHttpRequests.requestMatchers("/**").hasRole("USER");
-                }).csrf(AbstractHttpConfigurer::disable)
-                .httpBasic(Customizer.withDefaults());
+//        http.authorizeHttpRequests(authorizeHttpRequests -> {
+//                    authorizeHttpRequests.requestMatchers("/**").hasRole("USER");
+//                }).csrf(AbstractHttpConfigurer::disable)
+//                .httpBasic(Customizer.withDefaults());
+//        return http.build();
+        http.csrf(AbstractHttpConfigurer::disable);
         return http.build();
     }
 
