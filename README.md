@@ -41,7 +41,61 @@ spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
 
 ### 食堂监控
 
-#### 添加/更新食堂监控数据 - PUT `/canteen` 
+#### 获取全部食堂信息 - GET `/canteen/all`
+
+响应体举例：
+
+```json
+[
+    {
+        "announcement": "xxx",
+        "capacity": 10,
+        "imageUrl": "",
+        "name": "all",
+        "peopleNum": 2,
+        "saturation": 0.2,
+        "state": "畅通"
+    },
+    {
+        "announcement": "",
+        "capacity": 20,
+        "imageUrl": "https://i.ibb.co/2ZnPrCp/jyj.jpg",
+        "name": "聚英园餐厅",
+        "peopleNum": 16,
+        "saturation": 0.8,
+        "state": "爆满"
+    },
+    {
+        "announcement": "",
+        "capacity": 10,
+        "imageUrl": "https://i.ibb.co/jzjTbGr/he1.jpg",
+        "name": "荷园一餐厅",
+        "peopleNum": 5,
+        "saturation": 0.5,
+        "state": "拥挤"
+    },
+    {
+        "announcement": "荷园二食堂将于五月一日休息，届时将暂停营业，请各位同学提前安排好就餐时间。",
+        "capacity": 10,
+        "imageUrl": "https://i.ibb.co/0fL2nrR/he2.jpg",
+        "name": "荷园二餐厅",
+        "peopleNum": 8,
+        "saturation": 0.8,
+        "state": "爆满"
+    },
+    {
+        "announcement": "",
+        "capacity": 30,
+        "imageUrl": "https://i.ibb.co/HBW5F7q/fhy.jpg",
+        "name": "风华园餐厅",
+        "peopleNum": 1,
+        "saturation": 0.03333333333333333,
+        "state": "畅通"
+    }
+]
+```
+
+#### 添加/更新食堂数据 - PUT `/canteen` 
 
 请求体举例：
 
@@ -59,7 +113,7 @@ spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
 
 其中 `name` 为食堂监控实体的**唯一标识符 / ID**，也就是说数据库中各个食堂监控实体的名称唯一。
 
-#### 获取食堂监控信息 - GET `/canteen/{canteenName}` 
+#### 获取食堂信息 - GET `/canteen/{canteenName}` 
 
 例如 `http://localhost:8080/canteen/h1` 请求食堂名为 *h1* 的食堂的监控数据
 

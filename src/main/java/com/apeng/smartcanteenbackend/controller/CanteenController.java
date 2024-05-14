@@ -1,6 +1,7 @@
 package com.apeng.smartcanteenbackend.controller;
 
 import com.alibaba.fastjson2.JSON;
+import com.alibaba.fastjson2.JSONArray;
 import com.alibaba.fastjson2.JSONObject;
 import com.apeng.smartcanteenbackend.entity.Canteen;
 import com.apeng.smartcanteenbackend.repository.CanteenRepository;
@@ -9,7 +10,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -28,6 +31,20 @@ public class CanteenController {
 
     public CanteenController(CanteenRepository canteenRepository) {
         this.canteenRepository = canteenRepository;
+    }
+
+    @GetMapping("/all")
+    private String getAll() {
+        JSONArray canteenArray = new JSONArray();
+        fillCanteenArray(canteenArray);
+        return canteenArray.toJSONString();
+    }
+
+    private void fillCanteenArray(JSONArray canteenArray) {
+        canteenRepository.findAll().forEach(canteen -> {
+            JSONObject canteenObject = computeJSONObject(canteen);
+            canteenArray.add(canteenObject);
+        });
     }
 
     @GetMapping("/{canteenName}")
