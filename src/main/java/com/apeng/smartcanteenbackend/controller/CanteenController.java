@@ -13,8 +13,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/monitoring")
-public class MonitoringController {
+@RequestMapping("/canteen")
+public class CanteenController {
 
     private final CanteenRepository canteenRepository;
 
@@ -26,7 +26,7 @@ public class MonitoringController {
         saturation2StateMapping.put(Range.from(Range.Bound.inclusive(0.66)).to(Range.Bound.inclusive(Double.MAX_VALUE)), "爆满");
     }
 
-    public MonitoringController(CanteenRepository canteenRepository) {
+    public CanteenController(CanteenRepository canteenRepository) {
         this.canteenRepository = canteenRepository;
     }
 
@@ -35,6 +35,21 @@ public class MonitoringController {
         Canteen canteen = retriveCanteen(canteenName);
         JSONObject canteenObject = computeJSONObject(canteen);
         return canteenObject.toJSONString();
+    }
+
+    @PatchMapping("/{canteenName}")
+    private String updatePeopleNum(@PathVariable String canteenName, @RequestParam int peopleNum) {
+        Canteen canteen = retriveCanteen(canteenName);
+        canteen.setPeopleNum(peopleNum);
+        Canteen newCanteen = canteenRepository.save(canteen);
+        return String.format("Update people number to %d successfully!: %s", peopleNum, JSON.toJSONString(newCanteen));
+    }
+
+    @PutMapping
+    private String updateCanteen(@RequestBody String requestedCanteen) {
+        Canteen canteen = JSON.parseObject(requestedCanteen, Canteen.class);
+        canteenRepository.save(canteen);
+        return String.format("Update successfully: %s", requestedCanteen);
     }
 
     private static JSONObject computeJSONObject(Canteen canteen) {
@@ -65,21 +80,6 @@ public class MonitoringController {
     private Canteen retriveCanteen(String canteenName) {
         return canteenRepository.findById(canteenName).orElseThrow(()
                 -> new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("%s canteen not found", canteenName)));
-    }
-
-    @PatchMapping("/{canteenName}")
-    private String updatePeopleNum(@PathVariable String canteenName, @RequestParam int peopleNum) {
-        Canteen canteen = retriveCanteen(canteenName);
-        canteen.setPeopleNum(peopleNum);
-        Canteen newCanteen = canteenRepository.save(canteen);
-        return String.format("Update people number to %d successfully!: %s", peopleNum, JSON.toJSONString(newCanteen));
-    }
-
-    @PutMapping
-    private String updateCanteen(@RequestBody String requestedCanteen) {
-        Canteen canteen = JSON.parseObject(requestedCanteen, Canteen.class);
-        canteenRepository.save(canteen);
-        return String.format("Update successfully: %s", requestedCanteen);
     }
 
 }

@@ -80,7 +80,10 @@ public class CommonConfig {
     @Bean
     public CommandLineRunner addDefaultCanteen(CanteenRepository repository) {
         return (args) -> {
-            repository.save(new Canteen("荷园一餐厅", 10, 5));
+            repository.save(new Canteen("荷园一餐厅", 5, 10, "", "https://i.ibb.co/jzjTbGr/he1.jpg"));
+            repository.save(new Canteen("荷园二餐厅", 8, 10, "荷园二食堂将于五月一日休息，届时将暂停营业，请各位同学提前安排好就餐时间。", "https://i.ibb.co/0fL2nrR/he2.jpg"));
+            repository.save(new Canteen("聚英园餐厅", 16, 20, "", "https://i.ibb.co/2ZnPrCp/jyj.jpg"));
+            repository.save(new Canteen("风华园餐厅", 1, 30, "", "https://i.ibb.co/HBW5F7q/fhy.jpg"));
         };
     }
 

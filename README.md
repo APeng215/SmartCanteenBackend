@@ -41,44 +41,48 @@ spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
 
 ### 食堂监控
 
-#### 添加/更新食堂监控数据 - PUT `/monitoring` 
+#### 添加/更新食堂监控数据 - PUT `/canteen` 
 
 请求体举例：
 
 ```json
 {
     "name": "h1",
+    "peopleNum": 2,
     "capacity": 10,
-    "peopleNum": 2
+    "announcement": "xxx",
+    "imageUrl": ""
 }
 ```
 
-带有以上请求体的 PUT `/monitoring` 请求将向后端数据库添加一个名称为 *h1*，容量为 *10*，监控人数为 *2* 的食堂监控实体。
+带有以上请求体的 PUT `/canteen` 请求将向后端数据库添加一个名称为 *h1*，容量为 *10*，监控人数为 *2* 的食堂监控实体。
 
 其中 `name` 为食堂监控实体的**唯一标识符 / ID**，也就是说数据库中各个食堂监控实体的名称唯一。
 
-#### 获取食堂监控信息 - GET `/monitoring/{canteenName}` 
+#### 获取食堂监控信息 - GET `/canteen/{canteenName}` 
 
-例如 `http://localhost:8080/monitoring/h1` 请求食堂名为 *h1* 的食堂的监控数据
+例如 `http://localhost:8080/canteen/h1` 请求食堂名为 *h1* 的食堂的监控数据
 
 返回的数据格式如下：
 
 ```json
 {
-    "capacity": 10,
-    "name": "h1",
-    "peopleNum": 10,
-    "saturation": 1.0,
-    "state": "爆满"
+  "announcement": "",
+  "capacity": 10,
+  "imageUrl": "https://i.ibb.co/jzjTbGr/he1.jpg",
+  "name": "荷园一餐厅",
+  "peopleNum": 5,
+  "saturation": 0.5,
+  "state": "拥挤"
 }
 ```
 
 > [!TIP]
 > 数据库中初始化有餐厅名为 *荷园一餐厅* 的食堂监控实体，可供于测试。
 
-#### 更新食堂监控人数信息 - PATCH `/monitoring/{canteenName}?peopleNum={int}`
+#### 更新食堂监控人数信息 - PATCH `/canteen/{canteenName}?peopleNum={int}`
 
-例如 `http://localhost:8080/monitoring/h1?peopleNum=10` 将食堂名为 *h1* 的食堂的监控人数修改为 *10*
+例如 `http://localhost:8080/canteen/h1?peopleNum=10` 将食堂名为 *h1* 的食堂的监控人数修改为 *10*
 
 ### 订单
 
