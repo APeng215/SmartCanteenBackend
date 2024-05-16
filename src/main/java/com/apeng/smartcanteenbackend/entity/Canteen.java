@@ -22,4 +22,32 @@ public class Canteen {
     @Column(columnDefinition="TEXT")
     private String imageUrl;
 
+    /**
+     * 食堂人数增加 1
+     * @return 更新后的食堂人数
+     */
+    public int increasePeopleNum() {
+        peopleNum++;
+        return peopleNum;
+    }
+
+    /**
+     * 食堂人数减少 1
+     * @return 更新后的食堂人数
+     */
+    public int decreasePeopleNum() {
+        if (peopleNum == 0) {
+            throw new IllegalStateException("PeopleNum has been ZERO, can not be decreased!");
+        }
+        peopleNum--;
+        return peopleNum;
+    }
+
+    /**
+     * @return 食堂人数是否为 0
+     */
+    public boolean isEmpty() {
+        return peopleNum == 0;
+    }
+
 }

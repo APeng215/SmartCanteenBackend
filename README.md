@@ -41,6 +41,12 @@ spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
 
 ### 食堂监控
 
+#### 增加食堂人数 - PATCH `/{canteenName}/increasePeopleNum`
+
+#### 减少食堂人数 - PATCH `/{canteenName}/decreasePeopleNum`
+
+如果对人数**已经为 0** 的食堂执行此操作，会返回 `400 Bad Request`
+
 #### 获取全部食堂信息 - GET `/canteen/all`
 
 响应体举例：

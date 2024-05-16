@@ -40,13 +40,6 @@ public class CanteenController {
         return canteenArray.toJSONString();
     }
 
-    private void fillCanteenArray(JSONArray canteenArray) {
-        canteenRepository.findAll().forEach(canteen -> {
-            JSONObject canteenObject = computeJSONObject(canteen);
-            canteenArray.add(canteenObject);
-        });
-    }
-
     @GetMapping("/{canteenName}")
     private String getInfo(@PathVariable String canteenName) {
         Canteen canteen = retriveCanteen(canteenName);
@@ -62,11 +55,49 @@ public class CanteenController {
         return String.format("Update people number to %d successfully!: %s", peopleNum, JSON.toJSONString(newCanteen));
     }
 
+    @PatchMapping("/{canteenName}/increasePeopleNum")
+    private String increasePeopleNum(@PathVariable String canteenName) {
+        Canteen canteen = retriveCanteen(canteenName);
+        canteen.increasePeopleNum();
+        return saveAndReturnJson(canteen);
+    }
+
+    @PatchMapping("/{canteenName}/decreasePeopleNum")
+    private String decreasePeopleNum(@PathVariable String canteenName) {
+        Canteen canteen = retriveCanteen(canteenName);
+        checkEmpty(canteen);
+        canteen.decreasePeopleNum();
+        return saveAndReturnJson(canteen);
+    }
+
     @PutMapping
     private String updateCanteen(@RequestBody String requestedCanteen) {
         Canteen canteen = JSON.parseObject(requestedCanteen, Canteen.class);
         canteenRepository.save(canteen);
         return String.format("Update successfully: %s", requestedCanteen);
+    }
+
+    private static void checkEmpty(Canteen canteen) {
+        if (canteen.isEmpty()) {
+            throw new ResponseStatusException(
+                    HttpStatus.BAD_REQUEST,
+                    String.format(
+                            "Invalid request: Cannot decrease number, it is already zero. Requested canteen:\n%s",
+                            JSON.toJSONString(canteen)
+                    )
+            );
+        }
+    }
+
+    private void fillCanteenArray(JSONArray canteenArray) {
+        canteenRepository.findAll().forEach(canteen -> {
+            JSONObject canteenObject = computeJSONObject(canteen);
+            canteenArray.add(canteenObject);
+        });
+    }
+
+    private String saveAndReturnJson(Canteen canteen) {
+        return JSON.toJSONString(canteenRepository.save(canteen));
     }
 
     private static JSONObject computeJSONObject(Canteen canteen) {
