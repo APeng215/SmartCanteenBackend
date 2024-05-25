@@ -56,14 +56,14 @@ public class CanteenController {
     }
 
     @PatchMapping("/{canteenName}/increasePeopleNum")
-    private String increasePeopleNum(@PathVariable String canteenName) {
+    private synchronized String increasePeopleNum(@PathVariable String canteenName) {
         Canteen canteen = retriveCanteen(canteenName);
         canteen.increasePeopleNum();
         return saveAndReturnJson(canteen);
     }
 
     @PatchMapping("/{canteenName}/decreasePeopleNum")
-    private String decreasePeopleNum(@PathVariable String canteenName) {
+    private synchronized String decreasePeopleNum(@PathVariable String canteenName) {
         Canteen canteen = retriveCanteen(canteenName);
         checkEmpty(canteen);
         canteen.decreasePeopleNum();
